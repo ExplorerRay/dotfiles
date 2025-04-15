@@ -3,15 +3,15 @@ export DEBFULLNAME="Bo-Jun Huang"
 
 # mc related
 if [ -f /usr/lib/mc/mc.sh ]; then
-  . /usr/lib/mc/mc.sh
+    . /usr/lib/mc/mc.sh
 fi
 
 # quilt related
-alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
-. /usr/share/bash-completion/completions/quilt
-complete -F _quilt_completion $_quilt_complete_opt dquilt
-
-alias sdocker='sudo docker --config=/root/.docker'
+if [ -f /usr/share/bash-completion/completions/quilt ]; then
+    alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
+    . /usr/share/bash-completion/completions/quilt
+    complete -F _quilt_completion $_quilt_complete_opt dquilt
+fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -41,17 +41,26 @@ else
 fi
 unset color_prompt force_color_prompt
 
+# for bash-completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
 platform='unknown'
 unamestr=$(uname)
 if [ "$unamestr" = 'Linux' ]; then
-        platform='linux'
+    platform='linux'
 elif [ "$unamestr" = 'FreeBSD' ]; then
-        platform='freebsd'
+    platform='freebsd'
 fi
 
 if [ "$platform" = 'freebsd' ]; then
-        alias ls='ls -G'
+    alias ls='ls -G'
 elif [ "$platform" = 'linux' ]; then
-        alias ls='ls --color=auto'
+    alias ls='ls --color=auto'
 fi
-
+alias sdocker='sudo docker --config=/root/.docker'
