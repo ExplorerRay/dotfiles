@@ -64,3 +64,4 @@ elif [ "$platform" = 'linux' ]; then
     alias ls='ls --color=auto'
 fi
 alias sdocker='sudo docker --config=/root/.docker'
+alias grep='grep --color=auto'
