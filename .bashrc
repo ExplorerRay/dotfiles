@@ -1,3 +1,5 @@
+export EDITOR='vim'
+export VISUAL='vim'
 export DEBEMAIL="adopcarry@gmail.com"
 export DEBFULLNAME="Bo-Jun Huang"
 
