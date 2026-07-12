@@ -2,6 +2,11 @@ export EDITOR='vim'
 export VISUAL='vim'
 export DEBEMAIL="adopcarry@gmail.com"
 export DEBFULLNAME="Bo-Jun Huang"
+export CLAUDE_CODE_DISABLE_MOUSE_CLICKS=1
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # mc related
 if [ -f /usr/lib/mc/mc.sh ]; then
